@@ -4,7 +4,7 @@ import cv2
 CANAL_SELECCIONADO = 0
 KERNEL = (11, 11) # KERNEL del gausiano esta a 11 
 mk = np.ones((51,51),np.uint8) # Elemento morfologico
-cap = cv2.VideoCapture('camaraSeguridad.mp4') # Abre el video
+cap = cv2.VideoCapture('cochesPasando.mp4') # Abre el video
 background_frame = 0
 _, frame = cap.read() # Devuelve un frame, la _ indica que se rechaza el segundo parametro
 background_frame = np.copy(frame) # Copia el frame en una matriz nueva
