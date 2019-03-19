@@ -3,7 +3,7 @@ import cv2
 TIMER_ELAPSE = 5
 DIM_KERNEL = 11 # KERNEL del gausiano esta a 11 
 KERNEL = (DIM_KERNEL, DIM_KERNEL) 
-IMAGEN = 'camaraSeguridad.mp4'
+IMAGEN = 'cochesPasando.mp4'
 
 if __name__ == '__main__':
     cap = cv2.VideoCapture(0) # Abre el video
