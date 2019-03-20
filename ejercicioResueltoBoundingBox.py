@@ -2,9 +2,12 @@ import numpy as np
 import cv2
 
 KERNEL = (11, 11) # KERNEL del gausiano esta a 11 
-VERDE = (0,255,255)
+VERDE = (0,255,100)
+
 def crear_boundingbox(masked_frame, gray_mask):
-    _, contours,hierarchy = cv2.findContours(gray_mask,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)
+    mk = np.ones((51,51),np.uint8) # Elemento morfologico, lo agrego para eliminar los bounding box internos
+    gray_mask = cv2.morphologyEx(gray_mask, cv2.MORPH_CLOSE, mk)
+    _, contours,hierarchy = cv2.findContours(gray_mask,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
     idx =0 
     for cnt in contours:
         idx += 1
@@ -12,8 +15,12 @@ def crear_boundingbox(masked_frame, gray_mask):
         masked_frame[y:y+h,x] = VERDE 
         masked_frame[y+h-1,x:x+w] = VERDE 
         masked_frame[y:y+h,x+w-1] = VERDE 
-        masked_frame[y,x:x+w] = VERDE 
-    
+        masked_frame[y,x:x+w] = VERDE
+        color = np.zeros(3)
+        color[0] = np.rint(np.mean(masked_frame[y:y+h,x:x+w, 2]))
+        color[1] = np.rint(np.mean(masked_frame[y:y+h,x:x+w, 1]))
+        color[2] = np.rint(np.mean(masked_frame[y:y+h,x:x+w, 0]))
+        print('Hay un coche de color '+str(color))
     
     return masked_frame
 
