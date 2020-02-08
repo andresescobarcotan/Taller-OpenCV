@@ -3,19 +3,19 @@ import cv2
 TIMER_ELAPSE = 5
 DIM_KERNEL = 11 # KERNEL del gausiano esta a 11 
 KERNEL = (DIM_KERNEL, DIM_KERNEL) 
-IMAGEN = 'cochesPasando.mp4'
+IMAGEN = 'imagenPrueba.jpg'
+VIDEO = 0
 
 if __name__ == '__main__':
-    cap = cv2.VideoCapture(0) # Abre el video
+    cap = cv2.VideoCapture(VIDEO) # Abre el video
     fgbg = cv2.createBackgroundSubtractorKNN() #Usa el extractor de fondo por defecto de OpenCV
     img_pointer = cv2.VideoCapture(IMAGEN)
+    _,img = img_pointer.read()
     _, frame = cap.read() # Se lee el frame
     height, width = frame.shape[:2]
-    
+    img = cv2.resize(img, (width, height)) 
     while(cap.isOpened()): # Mientras haya frames
-        if(img_pointer.isOpened()):
-            _,img = img_pointer.read()
-            img = cv2.resize(img, (width, height))
+        
         _, frame = cap.read() # Se lee el frame
         gray_mask = fgbg.apply(frame,learningRate=0) # Aplica al frame la extraccion del fondo
         masked_frame = np.copy(frame) # Se copia el frame a otra matriz que sera de resultado
