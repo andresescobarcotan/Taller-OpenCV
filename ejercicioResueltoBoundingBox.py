@@ -5,6 +5,7 @@ KERNEL = (11, 11) # KERNEL del gausiano esta a 11
 VERDE = (0,255,100)
 AZUL = (255,100,0)
 ROJO = (100,0,255)
+VIDEO = 'cochesPasando.mp4'
 ancho = 0
 alto = 0
 punto_medio = 0
@@ -25,7 +26,7 @@ def pintar_linea(masked_frame):
 def crear_boundingbox(masked_frame, gray_mask):
     mk = np.ones((51,51),np.uint8) # Elemento morfologico, lo agrego para eliminar los bounding box internos
     gray_mask = cv2.morphologyEx(gray_mask, cv2.MORPH_CLOSE, mk)
-    _, contours,hierarchy = cv2.findContours(gray_mask,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
+    contours,hierarchy = cv2.findContours(gray_mask,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
     idx =0
     for cnt in contours:
         idx += 1
@@ -40,7 +41,7 @@ def crear_boundingbox(masked_frame, gray_mask):
     return masked_frame
 
 if __name__ == '__main__':
-    cap = cv2.VideoCapture('cochesPasando.mp4') # Abre el video
+    cap = cv2.VideoCapture(VIDEO) # Abre el video
     background_frame = 0
     _, frame = cap.read() # Devuelve un frame, la _ indica que se rechaza el segundo parametro
     background_frame = np.copy(frame) # Copia el frame en una matriz nueva

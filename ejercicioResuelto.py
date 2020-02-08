@@ -2,7 +2,8 @@ import numpy as np
 import cv2
 
 KERNEL = (11, 11) # KERNEL del gausiano esta a 11 
-cap = cv2.VideoCapture('cochesPasando.mp4') # Abre el video
+VIDEO = 'cochesPasando.mp4' # Contiene el video
+cap = cv2.VideoCapture(VIDEO) # Abre el video
 
 background_frame = 0
 _, frame = cap.read() # Devuelve un frame, la _ indica que se rechaza el segundo parametro

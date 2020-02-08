@@ -17,8 +17,8 @@ mostrar imagen : cv2.imshow('NOMBRE_VENTANA', imagen)
 
 
 '''
-
-cap = cv2.VideoCapture('cochesPasando.mp4') # Abre el video
+VIDEO = 'cochesPasando.mp4'
+cap = cv2.VideoCapture(VIDEO) # Abre el video
 
 _, frame = cap.read() # Devuelve un frame, la _ indica que se rechaza el segundo parametro
 
